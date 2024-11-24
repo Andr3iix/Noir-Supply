@@ -581,3 +581,46 @@ header .header-container {
     cursor: pointer; /* Muestra el cursor interactivo */
   }
 }
+@media (max-width: 768px) {
+  .catalogo-previa {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas por fila en móvil */
+    gap: 10px; /* Espaciado reducido entre los cuadros */
+    padding: 10px; /* Ajuste de relleno para pantallas pequeñas */
+  }
+
+  .catalogo-item {
+    height: auto; /* Altura automática para ajustarse mejor */
+  }
+
+  .catalogo-item img {
+    height: 120px; /* Imagen más compacta */
+  }
+
+  .catalogo-item p {
+    font-size: 0.85rem; /* Texto más pequeño para pantallas móviles */
+  }
+}
+@media (max-width: 768px) {
+  .catalogo-previa {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas por fila en móvil */
+    gap: 10px; /* Espaciado reducido entre los cuadros */
+    padding: 10px; /* Ajuste de relleno para pantallas pequeñas */
+  }
+
+  .catalogo-item {
+    height: auto; /* Altura automática para adaptarse al contenido */
+  }
+
+  .catalogo-item img {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    height: auto; /* Mantén la altura proporcional */
+    border-radius: 10px; /* Bordes redondeados para consistencia */
+    object-fit: contain; /* Asegura que la imagen no se recorte ni deforme */
+  }
+
+  .catalogo-item p {
+    font-size: 0.85rem; /* Texto más pequeño para pantallas móviles */
+  }
+}
