@@ -1,0 +1,325 @@
+
+/* General */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #121212; /* Fondo oscuro */
+  color: #e0e0e0;
+}
+
+/* Encabezado */
+header {
+  background: #1f1f1f;
+  color: white;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+header .header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px; /* Espacio entre logo y texto */
+}
+
+header .logo {
+  max-height: 40px; /* Tamaño más pequeño del logo */
+}
+
+header .title-container h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem; /* Tamaño más pequeño del título */
+  margin: 0;
+}
+header .logo {
+  max-height: 40px;
+  margin-right: 10px;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+header nav ul li a {
+  color: #ffffff;
+  text-decoration: none; /* Sin subrayado */
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+  color: #a854fd;
+}
+header .title-container p {
+  font-size: 0.9rem; /* Reducir subtítulo */
+  color: #a8a8a8;
+  margin: 0;
+}
+
+header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0; /* Espaciado reducido */
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Espacio reducido entre elementos del menú */
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding: 5px 8px; /* Reducir el área de clic */
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+header nav ul li a:hover {
+  color: #a854fd;
+  border-bottom: 2px solid #a854fd;
+}
+
+/* Hero */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
+  background: linear-gradient(90deg, #1f1f1f, #2c2c2c);
+}
+
+.hero h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  color: #a854fd;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #b8b8b8;
+}
+
+
+/* Refinar diseño del catálogo */
+
+/* Catálogo */
+.catalogo-previa {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Tamaño mínimo consistente */
+  gap: 30px; /* Espaciado más equilibrado */
+  padding: 20px; /* Relleno equilibrado */
+  justify-items: center; /* Centrado de los elementos */
+  align-items: start; /* Alineación superior */
+}
+
+
+
+.catalogo-item {
+  background-color: #1f1f1f;
+  text-align: center;
+  border-radius: 15px; /* Bordes redondeados */
+  overflow: hidden;
+  width: 100%; /* Se ajusta al contenedor */
+  max-width: 250px; /* Ancho máximo consistente */
+  min-height: 400px; /* Altura mínima */
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5); /* Sombras */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+
+.catalogo-item img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 15px; /* Bordes redondeados para imágenes */
+  animation: fadeIn 1s ease-in-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.catalogo-item p {
+  margin: 5px 0; /* Espaciado reducido */
+  padding: 10px 5px;
+  font-size: 1rem; /* Ajustar tamaño de texto */
+  color: #e0e0e0; /* Texto claro */
+  font-weight: bold;
+}
+
+.catalogo-item p:nth-child(2) {
+  color: #ffffff; /* Precio en blanco */
+  font-weight: bold;
+}
+
+.catalogo-item:hover {
+  transform: scale(1.1); /* Incremento más visible */
+  border-color: #ffffff; /* Cambiar borde al pasar el cursor */
+  box-shadow: 0px 8px 16px rgba(168, 84, 253, 0.6); /* Sombra más notoria */
+}
+
+/* Botón Ver Más */
+.btn-ver-mas {
+  background-color: #a854fd;
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 5px;
+  display: block; /* Para centrado */
+  margin: 20px auto 0 auto; /* Centrado */
+  padding: 15px 30px;
+  transition: background-color 0.3s, color 0.3s;
+  text-align: center;
+  width: fit-content;
+}
+
+.btn-ver-mas:hover {
+  background-color: #ffffff;
+  color: #a854fd;
+}
+
+
+/* Sección de Historia */
+#historia {
+  padding: 40px 10%;
+  text-align: center;
+}
+
+#historia h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  color: #a854fd;
+}
+
+#historia p {
+  font-size: 1.2rem;
+  color: #cfcfcf;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+/* Sección de Testimonios */
+.reseñas-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 50px;
+}
+
+.reseña img {
+  width: 100%;
+  border-radius: 5px;
+  object-fit: cover;
+}
+a {
+  text-decoration: none; /* Quita el subrayado por defecto */
+  color: inherit; /* Mantiene el color del texto */
+}
+
+a:hover {
+  text-decoration: none; /* Asegura que no aparezca subrayado en hover */
+  color: #a854fd; /* Cambia el color al pasar el mouse, opcional */
+}
+
+
+/* Footer */
+footer {
+  background: #1f1f1f;
+  text-align: center;
+  padding: 20px;
+  color: #a8a8a8;
+}
+
+footer a {
+  color: #a854fd;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+h2 {
+  color: #a854fd; /* Igual a "Explorar Moda Y2K" */
+  text-align: center;
+  margin: 20px 0;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem; /* Tamaño ajustado */
+}
+#feedback {
+  padding: 40px 10%;
+  text-align: center;
+  background-color: #121212; /* Fondo oscuro */
+  border-bottom: 2px solid #a854fd; /* Línea divisoria */
+}
+
+#feedback h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  color: #a854fd; /* Color del texto */
+  margin-bottom: 20px;
+}
+
+#feedback .reseñas-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+#feedback .reseña img {
+  width: 100%;
+  border-radius: 5px;
+  object-fit: cover;
+}
+#feedback {
+  margin-bottom: 0; /* Elimina cualquier margen inferior */
+  border-bottom: none; /* Asegúrate de que no haya línea */
+}
+
+footer {
+  margin-top: 0; /* Elimina el espacio superior */
+  border-top: 2px solid #a854fd; /* Si quieres mantener solo una línea aquí */
+}
+#feedback {
+  margin: 0; /* Elimina márgenes */
+  padding-bottom: 0; /* Elimina cualquier relleno extra */
+  border-bottom: none; /* Asegúrate de que no haya una línea extra */
+}
+.section {
+  padding: 40px 10%;
+  text-align: center;
+  background-color: #1f1f1f;
+}
+
+.section:not(:last-child) {
+  border-bottom: 2px solid #a854fd;
+}
+
+.section:nth-child(odd) {
+  background-color: #121212;
+}
+
+.section:nth-child(even) {
+  background-color: #1f1f1f;
+}

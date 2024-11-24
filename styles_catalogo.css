@@ -1,0 +1,232 @@
+
+/* General */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(180deg, #121212, #1e1e1e);
+  color: #e0e0e0;
+}
+
+/* Encabezado */
+header {
+  background: #1f1f1f;
+  color: white;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+header .header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px; /* Espacio entre logo y texto */
+}
+
+header .logo {
+  max-height: 40px; /* Tamaño más pequeño del logo */
+}
+
+header .title-container h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem; /* Tamaño más pequeño del título */
+  margin: 0;
+}
+header .logo {
+  max-height: 40px;
+  margin-right: 10px;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+header nav ul li a {
+  color: #ffffff;
+  text-decoration: none; /* Sin subrayado */
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+  color: #a854fd;
+}
+header .title-container p {
+  font-size: 0.9rem; /* Reducir subtítulo */
+  color: #a8a8a8;
+  margin: 0;
+}
+
+header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0; /* Espaciado reducido */
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Espacio reducido entre elementos del menú */
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding: 5px 8px; /* Reducir el área de clic */
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+header nav ul li a:hover {
+  color: #ffffff;
+  border-bottom: 2px solid #ffffff;
+}
+
+/* Galería */
+#catalogo {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+#catalogo h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  color: #a854fd;
+}
+
+.catalogo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.catalogo-item {
+  background-color: #1f1f1f; /* Fondo oscuro */
+  text-align: center;
+  background-color: #1f1f1f;
+  border-radius: 15px; /* Bordes más redondeados */
+  overflow: hidden;
+  width: 300px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5); /* Sombras en lugar de bordes */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.catalogo-item img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 15px; /* Bordes redondeados para imágenes */
+  animation: fadeIn 1s ease-in-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.catalogo-item:hover {
+  transform: scale(1.1) rotate(1deg);
+  box-shadow: 0 8px 16px rgba(168, 84, 253, 0.5);
+}
+
+.catalogo-item p {
+  font-size: 0.9rem;
+  color: #e0e0e0;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.catalogo-item:hover p {
+  color: #a854fd;
+  font-weight: bold;
+}
+
+#testimonios {
+  padding: 40px 20px; /* Espaciado superior e inferior */
+  margin: 0 auto; /* Centrar la sección */
+  max-width: 800px; /* Limitar el ancho para evitar que sea muy extenso */
+  text-align: center; /* Centrar el texto */
+}
+
+.testimonios-container {
+  display: flex;
+  flex-direction: column; /* Alinear testimonios en columna */
+  gap: 20px; /* Espacio entre los testimonios */
+  margin: 0 auto; /* Centrar el contenedor */
+}
+
+/* Estilo para el encabezado de Y2K Catálogo */
+.catalogo-header {
+  background: #1f1f1f;
+  color: #a854fd;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para el encabezado de Feedback */
+.feedback-header {
+  background: #1f1f1f;
+  color: #a854fd;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+/* Estilo para separar las secciones con una línea */
+.seccion {
+  padding: 40px 10%;
+  text-align: center;
+  background-color: #1f1f1f; /* Color de fondo de la sección */
+}
+
+.seccion:not(:last-child) {
+  border-bottom: 2px solid #a854fd; /* Línea separadora */
+}
+
+.seccion:nth-child(even) {
+  background-color: #121212; /* Fondo alternativo */
+}
+
+footer {
+  background: #1f1f1f;
+  text-align: center;
+  padding: 20px;
+  color: #a8a8a8;
+}
+
+footer a {
+  color: #a854fd;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+h2 {
+  color: #a854fd; /* Igual a "Explorar Moda Y2K" */
+  text-align: center;
+  margin: 20px 0;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem; /* Tamaño ajustado */
+}
