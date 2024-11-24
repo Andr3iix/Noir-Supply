@@ -537,23 +537,47 @@ header .header-container {
   margin: 0; /* Evitar desplazamientos inesperados */
 }
 @media (max-width: 768px) {
-  /* Asegurar que los estilos se apliquen específicamente en móviles */
-  header .title-container h1 {
-    font-size: 1.5rem !important; /* Reducir tamaño del título */
-    line-height: 1.2; /* Ajustar el espaciado entre líneas */
+  .catalogo-previa {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
+    gap: 15px; /* Espaciado entre las imágenes */
+    padding: 10px; /* Reducir el relleno para móviles */
   }
 
-  header .title-container p {
-    font-size: 0.8rem !important; /* Ajustar subtítulo */
+  .catalogo-item {
+    max-width: 100%; /* Ajustar el ancho al contenedor */
+    min-height: auto; /* Permitir que las imágenes se adapten automáticamente */
   }
 
-  header .logo {
-    max-height: 60px !important; /* Incrementar tamaño máximo del logo */
-    width: auto; /* Mantener la proporción del logo */
+  .catalogo-item img {
+    width: 100%; /* Las imágenes llenan el espacio del contenedor */
+    height: auto; /* Mantener proporciones */
+  }
+}
+@media (max-width: 768px) {
+  /* Feedback: Dos columnas para móviles */
+  #feedback .reseñas-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
+    gap: 15px; /* Espaciado entre las imágenes */
+    padding: 10px; /* Espaciado interno de la sección */
   }
 
-  /* Asegurar que el header tenga espacio suficiente para estos cambios */
-  .header-container {
-    gap: 10px; /* Ajustar el espaciado entre logo y título */
+  #feedback .reseña img {
+    width: 100%; /* Llenar el contenedor */
+    height: auto; /* Mantener proporción */
+    object-fit: cover; /* Recortar si es necesario */
+    border-radius: 10px; /* Bordes redondeados para consistencia */
+  }
+}
+@media (max-width: 768px) {
+  .hamburger {
+    font-size: 2rem; /* Incrementa el tamaño del botón */
+    margin: 0; /* Elimina márgenes adicionales */
+    padding: 5px; /* Espaciado interno más uniforme */
+    position: absolute; /* Asegura un posicionamiento flexible */
+    top: 15px; /* Ajusta la posición vertical */
+    right: 10px; /* Acerca el botón al borde derecho */
+    cursor: pointer; /* Muestra el cursor interactivo */
   }
 }
