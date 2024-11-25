@@ -381,7 +381,7 @@ h2 {
     border-radius: 10px; /* Bordes redondeados para consistencia */
   }
   .hamburger {
-    font-size: 2rem; /* Incrementa el tamaño del botón */
+    font-size: 2.5rem; /* Incrementa el tamaño del botón */
     margin: 0; /* Elimina márgenes adicionales */
     padding: 5px; /* Espaciado interno más uniforme */
     position: absolute; /* Asegura un posicionamiento flexible */
