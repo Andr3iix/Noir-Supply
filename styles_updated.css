@@ -1,4 +1,3 @@
-
 /* General */
 body {
   font-family: 'Poppins', sans-serif;
@@ -10,24 +9,29 @@ body {
 
 /* Encabezado */
 header {
-  background: #1f1f1f;
   color: white;
   text-align: center;
-  position: sticky;
-  top: 0;
   z-index: 1000;
-  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  margin: 0;
+  padding: 15px 20px; /* Asegura un espacio interno suficiente */
+  background-color: #1f1f1f; /* Fondo uniforme */
+  border: none;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Sombra debajo del encabezado */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 header .header-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 15px; /* Espacio entre logo y texto */
+  min-height: 60px; /* Mantener la altura del header */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 header .logo {
@@ -47,38 +51,17 @@ header .logo {
 header nav ul {
   list-style: none;
   display: flex;
-  gap: 15px;
-  margin: 0;
-  padding: 0;
-}
-
-header nav ul li a {
-  color: #ffffff;
-  text-decoration: none; /* Sin subrayado */
-  font-weight: bold;
-  font-size: 0.9rem;
-  transition: color 0.3s;
-}
-
-header nav ul li a:hover {
-  color: #a854fd;
-}
-header .title-container p {
-  font-size: 0.9rem; /* Reducir subtítulo */
-  color: #a8a8a8;
-  margin: 0;
-}
-
-header nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0; /* Espaciado reducido */
-  display: flex;
   justify-content: center;
   gap: 15px; /* Espacio reducido entre elementos del menú */
+  border: none;
+  margin: 0;
+  padding: 0;
+  background-color: #1f1f1f; /* Asegurar que coincida con el fondo */
+  box-shadow: none; /* Eliminar cualquier sombra */
 }
 
 header nav ul li a {
+  font-size: 0.9rem;
   text-decoration: none;
   color: white;
   font-weight: bold;
@@ -90,6 +73,12 @@ header nav ul li a:hover {
   color: #a854fd;
   border-bottom: 2px solid #a854fd;
 }
+header .title-container p {
+  font-size: 0.9rem; /* Reducir subtítulo */
+  color: #a8a8a8;
+  margin: 0;
+}
+
 
 /* Hero */
 .hero {
@@ -249,6 +238,8 @@ footer {
   text-align: center;
   padding: 20px;
   color: #a8a8a8;
+  margin-top: 0; /* Elimina el espacio superior */
+  border-top: 2px solid #a854fd; /* Si quieres mantener solo una línea aquí */
 }
 
 footer a {
@@ -271,6 +262,9 @@ h2 {
   text-align: center;
   background-color: #121212; /* Fondo oscuro */
   border-bottom: 2px solid #a854fd; /* Línea divisoria */
+  margin-bottom: 0; /* Elimina cualquier margen inferior */
+  padding-bottom: 0; /* Elimina cualquier relleno extra */
+  border-bottom: none; /* Asegúrate de que no haya línea */
 }
 
 #feedback h2 {
@@ -292,20 +286,8 @@ h2 {
   border-radius: 5px;
   object-fit: cover;
 }
-#feedback {
-  margin-bottom: 0; /* Elimina cualquier margen inferior */
-  border-bottom: none; /* Asegúrate de que no haya línea */
-}
 
-footer {
-  margin-top: 0; /* Elimina el espacio superior */
-  border-top: 2px solid #a854fd; /* Si quieres mantener solo una línea aquí */
-}
-#feedback {
-  margin: 0; /* Elimina márgenes */
-  padding-bottom: 0; /* Elimina cualquier relleno extra */
-  border-bottom: none; /* Asegúrate de que no haya una línea extra */
-}
+
 .section {
   padding: 40px 10%;
   text-align: center;
@@ -324,63 +306,21 @@ footer {
   background-color: #1f1f1f;
 }
 /* Estilos generales permanecen iguales */
-
-/* Estilos para móviles */
-@media (max-width: 768px) {
-  /* Ocultar menú estándar */
-  header nav ul {
-    display: none;
-    flex-direction: column;
-    gap: 10px;
-    background-color: #1f1f1f;
-    padding: 20px;
-    position: absolute;
-    top: 60px; /* Ajustar debajo del header */
-    right: 0;
-    width: 100%;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-    border-radius: 0 0 10px 10px;
-  }
-
-  /* Mostrar menú si está activo */
-  header nav ul.active {
-    display: flex;
-  }
-
-  /* Botón hamburguesa */
-  .hamburger {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: white;
-    cursor: pointer;
-    display: block;
-  }
-
-  /* Asegurar el diseño del header */
-  .header-container {
-    justify-content: space-between;
-  }
-}
-/* Ocultar el botón hamburguesa en pantallas grandes */
 .hamburger {
   display: none;
 }
-
-/* Mostrar el botón hamburguesa solo en móviles */
+/* Estilos para móviles */
 @media (max-width: 768px) {
-  .hamburger {
-    display: block;
+  header {
+    position: relative; /* Garantizar que el nav esté relacionado al header */
+    border-bottom: none;
   }
-}
-@media (max-width: 768px) {
-  /* Ocultar menú estándar y preparar estilos */
+  /* Ocultar menú estándar */
   header nav ul {
+    top: 60px; /* Ajustar debajo del header */
     display: none;
     flex-direction: column;
     gap: 10px;
-    background-color: #1f1f1f;
-    padding: 20px;
     position: absolute;
     top: 100%; /* Ubicar el menú justo debajo del header */
     right: 0;
@@ -388,174 +328,45 @@ footer {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
     border-radius: 0 0 10px 10px;
     z-index: 1000; /* Asegurar que el menú esté por encima de otros elementos */
-  }
-
-  /* Mostrar el menú si está activo */
-  header nav ul.active {
-    display: flex;
-  }
-
-  /* Asegurar que el header no se oculte */
-  header {
-    position: relative; /* Garantizar que el nav esté relacionado al header */
-  }
-
-  /* Botón hamburguesa */
-  .hamburger {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: white;
-    cursor: pointer;
-    display: block;
-  }
-
-  /* Espaciado entre el menú y el contenido principal */
-  main {
-    margin-top: 10px; /* Ajustar según el diseño deseado */
-  }
-}
-/* Asegurar que no haya líneas negras debajo del header */
-header {
-  margin: 0;
-  padding: 0;
-  border: none;
-  background-color: #1f1f1f; /* Color consistente con el fondo */
-}
-
-/* Eliminar márgenes adicionales alrededor de elementos del header */
-.header-container {
-  margin: 0;
-  padding: 0;
-}
-
-/* Evitar espacios adicionales entre el header y el contenido */
-main {
-  margin: 0;
-  padding-top: 10px; /* Opcional: Espaciado para separar el contenido del header */
-}
-
-/* Remover cualquier borde adicional o margen en el nav */
-header nav {
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-
-/* Quitar líneas negras no deseadas en el menú desplegable */
-@media (max-width: 768px) {
-  header nav ul {
-    border: none;
-    margin: 0;
-    padding: 0;
-  }
-}
-/* Ajuste global para eliminar cualquier borde o sombra en todos los elementos */
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  box-shadow: none;
-}
-
-/* Asegurarse de que el header no tenga bordes o sombras */
-header {
-  margin: 0;
-  padding: 0;
-  border: none;
-  background-color: #1f1f1f; /* Fondo uniforme */
-  box-shadow: none; /* Elimina cualquier sombra en el header */
-}
-
-/* Eliminar sombras o bordes del menú */
-header nav ul {
-  border: none;
-  margin: 0;
-  padding: 0;
-  background-color: #1f1f1f; /* Asegurar que coincida con el fondo */
-  box-shadow: none; /* Eliminar cualquier sombra */
-}
-
-/* Manejo del contenedor principal para evitar conflictos */
-main {
-  margin: 0;
-  padding: 0;
-  background-color: #121212; /* Fondo consistente con el diseño */
-}
-
-/* Quitar líneas negras adicionales en móviles */
-@media (max-width: 768px) {
-  header nav ul {
     border: none;
     margin: 0;
     padding: 0;
     background-color: #1f1f1f;
   }
 
-  /* Solucionar posibles bordes visibles */
-  header {
-    border-bottom: none;
+  /* Mostrar menú si está activo */
+  header nav ul.active {
+    display: flex;
   }
-}
-
-/* Remover líneas o márgenes extra en el contenedor del header */
-.header-container {
-  margin: 0;
-  padding: 0;
-  border: none;
-  box-shadow: none;
-}
-header {
-  margin: 0;
-  padding: 0;
-  background-color: #1f1f1f; /* Fondo uniforme */
-  border: none; /* Asegurar que no haya bordes */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Sombra suave debajo del encabezado */
-}
-header {
-  margin: 0;
-  padding: 15px 20px; /* Asegura un espacio interno suficiente */
-  background-color: #1f1f1f; /* Fondo uniforme */
-  border: none;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Sombra debajo del encabezado */
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-/* Asegurar tamaño mínimo del encabezado */
-header .header-container {
-  min-height: 60px; /* Mantener la altura del header */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Botón de menú para móviles */
-.hamburger {
-  font-size: 1.5rem;
-  margin: 0; /* Evitar desplazamientos inesperados */
-}
-@media (max-width: 768px) {
+  /* Asegurar el diseño del header */
+  .header-container {
+    justify-content: space-between;
+  }
+  main {
+    margin-top: 10px; /* Ajustar según el diseño deseado */
+  }
   .catalogo-previa {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
-    gap: 15px; /* Espaciado entre las imágenes */
-    padding: 10px; /* Reducir el relleno para móviles */
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas por fila en móvil */
+    gap: 10px; /* Espaciado reducido entre los cuadros */
+    padding: 10px; /* Ajuste de relleno para pantallas pequeñas */
   }
 
   .catalogo-item {
     max-width: 100%; /* Ajustar el ancho al contenedor */
     min-height: auto; /* Permitir que las imágenes se adapten automáticamente */
+    height: auto; /* Altura automática para ajustarse mejor */
   }
-
+  .catalogo-item p {
+    font-size: 0.85rem; /* Texto más pequeño para pantallas móviles */
+  }
   .catalogo-item img {
-    width: 100%; /* Las imágenes llenan el espacio del contenedor */
-    height: auto; /* Mantener proporciones */
+    height: 120px; /* Imagen más compacta */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    height: auto; /* Mantén la altura proporcional */
+    border-radius: 10px; /* Bordes redondeados para consistencia */
+    object-fit: contain; /* Asegura que la imagen no se recorte ni deforme */
   }
-}
-@media (max-width: 768px) {
-  /* Feedback: Dos columnas para móviles */
   #feedback .reseñas-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
@@ -569,8 +380,6 @@ header .header-container {
     object-fit: cover; /* Recortar si es necesario */
     border-radius: 10px; /* Bordes redondeados para consistencia */
   }
-}
-@media (max-width: 768px) {
   .hamburger {
     font-size: 2rem; /* Incrementa el tamaño del botón */
     margin: 0; /* Elimina márgenes adicionales */
@@ -579,48 +388,36 @@ header .header-container {
     top: 15px; /* Ajusta la posición vertical */
     right: 10px; /* Acerca el botón al borde derecho */
     cursor: pointer; /* Muestra el cursor interactivo */
+    background: none;
+    border: none;
+    color: white;
+    display: block;
   }
 }
-@media (max-width: 768px) {
-  .catalogo-previa {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas por fila en móvil */
-    gap: 10px; /* Espaciado reducido entre los cuadros */
-    padding: 10px; /* Ajuste de relleno para pantallas pequeñas */
-  }
 
-  .catalogo-item {
-    height: auto; /* Altura automática para ajustarse mejor */
-  }
-
-  .catalogo-item img {
-    height: 120px; /* Imagen más compacta */
-  }
-
-  .catalogo-item p {
-    font-size: 0.85rem; /* Texto más pequeño para pantallas móviles */
-  }
+.header-container {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-shadow: none;
 }
-@media (max-width: 768px) {
-  .catalogo-previa {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas por fila en móvil */
-    gap: 10px; /* Espaciado reducido entre los cuadros */
-    padding: 10px; /* Ajuste de relleno para pantallas pequeñas */
-  }
+main {
+  padding-top: 10px; /* Opcional: Espaciado para separar el contenido del header */
+  margin: 0;
+  padding: 0;
+  background-color: #121212; /* Fondo consistente con el diseño */
+}
 
-  .catalogo-item {
-    height: auto; /* Altura automática para adaptarse al contenido */
-  }
-
-  .catalogo-item img {
-    width: 100%; /* Ocupa todo el ancho disponible */
-    height: auto; /* Mantén la altura proporcional */
-    border-radius: 10px; /* Bordes redondeados para consistencia */
-    object-fit: contain; /* Asegura que la imagen no se recorte ni deforme */
-  }
-
-  .catalogo-item p {
-    font-size: 0.85rem; /* Texto más pequeño para pantallas móviles */
-  }
+/* Remover cualquier borde adicional o margen en el nav */
+header nav {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+/* Ajuste global para eliminar cualquier borde o sombra en todos los elementos */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
 }
