@@ -60,3 +60,45 @@ console.log({
   bottom: rect.bottom,
   isVisible
 });
+document.addEventListener('DOMContentLoaded', () => {
+  // Botón de aplicar filtros
+  const btnAplicarFiltros = document.getElementById('btn-aplicar-filtros');
+
+  // Función para aplicar filtros cuando se haga clic en el botón
+  btnAplicarFiltros.addEventListener('click', () => {
+    // Obtener los valores de los filtros
+    const disponible = document.getElementById('disponible').checked;
+    const noDisponible = document.getElementById('no-disponible').checked;
+    const precioMinimo = parseFloat(document.getElementById('precio-minimo').value) || 0;
+    const precioMaximo = parseFloat(document.getElementById('precio-maximo').value) || Infinity;
+
+    const marcasSeleccionadas = Array.from(document.querySelectorAll('input[name="marca"]:checked'))
+                                       .map(input => input.value);
+
+    // Filtrar los productos
+    const catalogoItems = document.querySelectorAll('.catalogo-item');
+    catalogoItems.forEach(item => {
+      // Obtener el precio del producto
+      const precioProducto = parseFloat(item.querySelector('p').textContent.match(/S\/(\d+(\.\d+)?)/)[1]);
+
+      // Obtener la marca del producto
+      const marcaProducto = item.querySelector('p').textContent.match(/(Ecko|LRG|Rocawear|Timberland|REDAPE|Jnco)/);
+      const marca = marcaProducto ? marcaProducto[0] : '';
+
+      // Obtener disponibilidad (se debe marcar los productos como disponibles o no disponibles en su HTML)
+      const disponibleProducto = item.classList.contains('disponible');  // Asegúrate de marcar los productos disponibles
+
+      // Comprobar si el producto cumple con los filtros seleccionados
+      const cumpleDisponibilidad = (disponible && disponibleProducto) || (noDisponible && !disponibleProducto);
+      const cumplePrecio = precioProducto >= precioMinimo && precioProducto <= precioMaximo;
+      const cumpleMarca = marcasSeleccionadas.length === 0 || marcasSeleccionadas.includes(marca);
+
+      // Mostrar o ocultar el producto según los filtros
+      if (cumpleDisponibilidad && cumplePrecio && cumpleMarca) {
+        item.style.display = 'block';  // Mostrar el producto
+      } else {
+        item.style.display = 'none';  // Ocultar el producto
+      }
+    });
+  });
+});
