@@ -535,40 +535,6 @@ const updateCatalogUrl = () => {
   return nextUrl;
 };
 
-const getExpectedCatalogCount = () => {
-  const search = catalogState.query.trim().toLowerCase();
-
-  return catalogProducts
-    .map(getCatalogProduct)
-    .filter((product) => {
-      const matchesStatus =
-        catalogState.status === 'all'
-        || (catalogState.status === 'available' && !product.isSold)
-        || (catalogState.status === 'sold' && product.isSold);
-      const matchesCategory = catalogState.category === 'all' || product.category === catalogState.category;
-      const matchesSearch = !search || `${product.name} ${product.brand} ${product.description}`.toLowerCase().includes(search);
-
-      return matchesStatus && matchesCategory && matchesSearch;
-    })
-    .length;
-};
-
-const getVisibleCatalogCount = () => (
-  [...document.querySelectorAll('[data-products-container][data-catalog-controls="true"] .catalogo-item')]
-    .filter((card) => !card.hidden)
-    .length
-);
-
-const ensureCatalogApplied = (nextUrl) => {
-  if (!nextUrl) return;
-
-  window.setTimeout(() => {
-    if (getVisibleCatalogCount() !== getExpectedCatalogCount()) {
-      window.location.assign(nextUrl);
-    }
-  }, 140);
-};
-
 const escapeHtml = (value) => String(value)
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
