@@ -1,126 +1,90 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Noir Supply ofrece ropa vintage Y2K única. Explora moda sostenible con estilo y exclusividad.">
-  <title>Noir Supply - Y2K Vintage</title>
+  <meta name="description" content="Noir Supply: archivo Y2K second hand con denim baggy, jorts, hoodies graficas y piezas 1/1 seleccionadas por Instagram.">
+  <title>Noir Supply - Archivo Y2K Second Hand</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles_updated.css">
-  <link rel="icon" href="/img/icon.png/" type="image/x-icon">
+  <link rel="stylesheet" href="styles_updated.css?v=mobile-store-2026">
+  <link rel="icon" href="/img/icon.png" type="image/x-icon">
   <meta property="og:image" content="https://noirarchive.netlify.app/img/icon.png">
 </head>
 <body>
   <header>
     <div class="header-container">
       <a href="/index.html" aria-label="Logo Noir Supply">
-        <img src="img/icon.png" alt="Logo de Noir Supply" class="logo">
+        <img src="img/icon.png?v=noir-tribal-matte" alt="Logo de Noir Supply" class="logo">
       </a>
       <div class="title-container">
         <a href="/index.html">
-          <h1>Noir Supply</h1>
-          <p>Prendas Y2K - Second Hand</p>
+          <span class="brand-name">Noir Supply</span>
+          <p>Archivo Y2K / Second Hand</p>
         </a>
       </div>
-      <!-- Botón de menú para móviles (NUEVO) -->
-      <button id="hamburger" aria-label="Abrir menú" class="hamburger">
-        ☰
-      </button>
+      <button id="hamburger" aria-label="Abrir menú" aria-expanded="false" class="hamburger">☰</button>
     </div>
-    <!-- Menú de navegación -->
-    <nav id="nav-menu">
+    <nav id="nav-menu" aria-label="Menú principal">
       <ul>
         <li><a href="/index.html">Inicio</a></li>
-        <li><a href="/galeria.html">Catálogo</a></li>
-        <li><a href="/nosotros.html">Nuestra Historia</a></li>
-        <li><a href="/feedback.html">Feedback</a></li>
-        <li><a href="/contacto.html">Contacto</a></li>
+        <li><a href="/drop.html">Drop</a></li>
+        <li><a href="/galeria.html">Catalogo</a></li>
+        <li><a href="/nosotros.html">Historia</a></li>
+        <li><a href="/feedback.html">Clientes</a></li>
+        <li><a href="https://instagram.com/noirsupply0" target="_blank" rel="noopener noreferrer">IG</a></li>
       </ul>
     </nav>
   </header>
+
   <main>
     <section class="hero fade-in">
-      <h1>Explora la Moda Y2K</h1>
-      <p>Prendas únicas, estilo futurista y sostenibilidad en un solo lugar.</p>
+      <div>
+        <p class="hero-kicker">Archivo second hand</p>
+        <h1>Noir<br>Supply</h1>
+        <p>Y2K denim, jorts largos y hoodies graficas curadas para outfits oscuros, amplios y 1/1.</p>
+        <div class="hero-actions">
+          <a href="/drop.html" class="btn-ver-mas">Ultimo drop</a>
+          <a href="https://instagram.com/noirsupply0" class="btn-secondary" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+      </div>
     </section>
-    <section id="historia" class="section fade-in">
-      <h2>Acerca de Noir</h2>
-      <p>Cada prenda que encuentras en Noir Supply fue seleccionada cuidadosamente para evocar los vibrantes años 2000.
-        Rescatamos tesoros vintage que no encontrarás en ningún otro lugar, priorizando la exclusividad y la sostenibilidad.</p>
-      <a href="/nosotros.html" class="btn-ver-mas">Leer más</a>
+
+    <div class="drop-marquee" aria-label="Beneficios del drop">
+      <span>Drop colaboracion</span>
+      <span>1/1 only</span>
+      <span>Preventa activa</span>
+      <span>DM para separar</span>
+    </div>
+
+    <section class="shop-categories fade-in" aria-label="Categorias">
+      <a href="/galeria.html">Jorts</a>
+      <a href="/galeria.html">Denim</a>
+      <a href="/galeria.html">Hoodies</a>
+      <a href="/galeria.html">Jackets</a>
     </section>
+
     <section id="catalogo-previa" class="section fade-in">
-      <h2><a href="/galeria.html">Catálogo</a></h2>
-      <div class="catalogo-previa">
-        <div class="catalogo-item">
-          <a href="/producto1.html">
-            <img src="/img/prendas/producto1.jpg" alt="Casaca Ecko - Precio: S/75">
-            <p>Casaca Ecko <br> Precio: S/75</p>
-          </a>
-        </div>
-        <div class="catalogo-item">
-          <a href="/producto2.html">
-            <img src="/img/prendas/producto2.jpg" alt="Polera LRG - Precio: S/65">
-            <p>Polera LRG <br> Precio: S/65</p>
-          </a>
-        </div>
-        <div class="catalogo-item">
-          <a href="/producto3.html">
-            <img src="/img/prendas/producto3.jpg" alt="Pantalón Rocawear - Precio: S/70">
-            <p>Pantalón Rocawear <br> Precio: S/70</p>
-          </a>
-        </div>
-        <div class="catalogo-item">
-          <a href="/producto4.html">
-            <img src="/img/prendas/producto4.jpg" alt="Jort Vintage - Precio: S/60">
-            <p>Jort Vintage <br> Precio: S/60</p>
-          </a>
-        </div>
-        <div class="catalogo-item">
-          <a href="/producto4.html">
-            <img src="/IMG/prendas/producto5.jpg" alt="Jort Vintage - Precio: S/60">
-            <p>Jort Timberland <br> Precio: S/50</p>
-          </a>
-        </div>
-        <div class="catalogo-item">
-          <a href="/producto4.html">
-            <img src="/IMG/prendas/producto6.jpg" alt="Jort Vintage - Precio: S/60">
-            <p>Jort baggy REDAPE <br> Precio: S/75</p>
-          </a>
-        </div>
-        <div class="catalogo-item">
-          <a href="/producto4.html">
-            <img src="/IMG/prendas/producto7.jpg" alt="Jort Vintage - Precio: S/60">
-            <p>Baggy pant simple type jnco<br> Precio: S/75</p>
-          </a>
-        </div>
-      </div>
-      <a href="/galeria.html" class="btn-ver-mas">Ver más</a>
+      <p class="section-kicker">Archivo en venta</p>
+      <h2><a href="/galeria.html">Piezas destacadas</a></h2>
+      <div class="catalogo-previa" data-products-container data-limit="4"></div>
+      <a href="/galeria.html" class="btn-ver-mas">Ver catalogo</a>
     </section>
-    <section id="feedback" class="section fade-in">
-      <h2><a href="/feedback.html">Feedback</a></h2>
-      <div class="reseñas-container">
-        <div class="reseña">
-          <img src="/img/feedback/feedback1.jpg" alt="Reseña de cliente 1">
-        </div>
-        <div class="reseña">
-          <img src="/img/feedback/feedback2.jpg" alt="Reseña de cliente 2">
-        </div>
-        <div class="reseña">
-          <img src="/img/feedback/feedback3.jpg" alt="Reseña de cliente 3">
-        </div>
-        <div class="reseña">
-          <img src="/img/feedback/feedback4.jpg" alt="Reseña de cliente 4">
-        </div>
+
+    <section id="historia" class="section brand-band fade-in">
+      <div>
+        <p class="section-kicker">Compra directa</p>
+        <h2>DM first</h2>
       </div>
+      <p>Cada pieza se publica con stock limitado. Si algo encaja con tu outfit, separalo por Instagram antes de que salga del archivo.</p>
+      <a href="https://ig.me/m/noirsupply0" class="btn-secondary" target="_blank" rel="noopener noreferrer">Escribir DM</a>
     </section>
   </main>
-  <footer><br><br><br>
-    <p>© 2024 Noir Supply. Todos los derechos reservados. |
+
+  <footer>
+    <p>&copy; 2026 Noir Supply. Archivo Y2K second hand. |
       <a href="https://instagram.com/noirsupply0" target="_blank" rel="noopener noreferrer">Instagram</a>
     </p>
   </footer>
-  <!-- Script añadido -->
-  <script src="script.js"></script>
+  <script src="script.js?v=drop-filters-fixed"></script>
 </body>
 </html>
