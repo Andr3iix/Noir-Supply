@@ -502,6 +502,73 @@ const catalogState = {
   query: ''
 };
 
+const readCatalogStateFromUrl = () => {
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get('status');
+  const category = params.get('category');
+  const query = params.get('q');
+
+  if (['all', 'available', 'sold'].includes(status)) catalogState.status = status;
+  if (['all', 'jorts', 'denim', 'hoodies', 'jackets'].includes(category)) catalogState.category = category;
+  if (query) {
+    catalogState.query = query;
+    catalogState.status = 'all';
+  }
+};
+
+const updateCatalogUrl = () => {
+  if (!document.querySelector('[data-catalog-filters]')) return;
+
+  const params = new URLSearchParams(window.location.search);
+
+  if (catalogState.status === 'all') params.delete('status');
+  else params.set('status', catalogState.status);
+
+  if (catalogState.category === 'all') params.delete('category');
+  else params.set('category', catalogState.category);
+
+  if (catalogState.query.trim()) params.set('q', catalogState.query.trim());
+  else params.delete('q');
+
+  const nextUrl = `${window.location.pathname}${params.toString() ? `?${params}` : ''}${window.location.hash}`;
+  window.history.replaceState({}, '', nextUrl);
+  return nextUrl;
+};
+
+const getExpectedCatalogCount = () => {
+  const search = catalogState.query.trim().toLowerCase();
+
+  return catalogProducts
+    .map(getCatalogProduct)
+    .filter((product) => {
+      const matchesStatus =
+        catalogState.status === 'all'
+        || (catalogState.status === 'available' && !product.isSold)
+        || (catalogState.status === 'sold' && product.isSold);
+      const matchesCategory = catalogState.category === 'all' || product.category === catalogState.category;
+      const matchesSearch = !search || `${product.name} ${product.brand} ${product.description}`.toLowerCase().includes(search);
+
+      return matchesStatus && matchesCategory && matchesSearch;
+    })
+    .length;
+};
+
+const getVisibleCatalogCount = () => (
+  [...document.querySelectorAll('[data-products-container][data-catalog-controls="true"] .catalogo-item')]
+    .filter((card) => !card.hidden)
+    .length
+);
+
+const ensureCatalogApplied = (nextUrl) => {
+  if (!nextUrl) return;
+
+  window.setTimeout(() => {
+    if (getVisibleCatalogCount() !== getExpectedCatalogCount()) {
+      window.location.assign(nextUrl);
+    }
+  }, 140);
+};
+
 const escapeHtml = (value) => String(value)
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
@@ -510,7 +577,12 @@ const escapeHtml = (value) => String(value)
   .replaceAll("'", '&#039;');
 
 const renderProductCard = (product) => `
-  <div class="catalogo-item ${product.isSold ? 'vendida' : 'disponible'} fade-in">
+  <div
+    class="catalogo-item ${product.isSold ? 'vendida' : 'disponible'} fade-in"
+    data-product-status="${product.isSold ? 'sold' : 'available'}"
+    data-product-category="${escapeHtml(product.category)}"
+    data-product-search="${escapeHtml(`${product.name} ${product.brand} ${product.description}`.toLowerCase())}"
+  >
     <a class="catalogo-media-link" href="/producto.html?id=${product.id}">
       <div class="catalogo-media">
         <span class="product-badge">${escapeHtml(product.status)}</span>
@@ -536,7 +608,6 @@ const renderCatalogs = () => {
   document.querySelectorAll('[data-products-container]').forEach((container) => {
     const limit = Number(container.dataset.limit) || catalogProducts.length;
     const mode = container.dataset.catalogMode || 'all';
-    const search = catalogState.query.trim().toLowerCase();
 
     let visibleProducts = catalogProducts.map(getCatalogProduct);
 
@@ -547,14 +618,7 @@ const renderCatalogs = () => {
     if (container.dataset.catalogControls === 'true') {
       visibleProducts = visibleProducts.filter((product) => {
         const matchesCollection = catalogState.collection === 'all' || product.collection === catalogState.collection;
-        const matchesStatus =
-          catalogState.status === 'all'
-          || (catalogState.status === 'available' && !product.isSold)
-          || (catalogState.status === 'sold' && product.isSold);
-        const matchesCategory = catalogState.category === 'all' || product.category === catalogState.category;
-        const matchesSearch = !search || `${product.name} ${product.brand} ${product.description}`.toLowerCase().includes(search);
-
-        return matchesCollection && matchesStatus && matchesCategory && matchesSearch;
+        return matchesCollection;
       });
     }
 
@@ -595,53 +659,130 @@ const renderProductDetail = () => {
 
 const enableImageHover = () => {};
 
-const setupCatalogFilters = () => {
-  const controlsGroups = document.querySelectorAll('[data-catalog-filters]');
-  if (!controlsGroups.length) return;
+const syncCatalogControls = () => {
+  document.querySelectorAll('[data-filter-collection]').forEach((item) => {
+    item.classList.toggle('is-active', item.dataset.filterCollection === catalogState.collection);
+  });
 
-  controlsGroups.forEach((controls) => {
-    controls.querySelectorAll('[data-filter-collection]').forEach((button) => {
-      button.addEventListener('click', () => {
-        catalogState.collection = button.dataset.filterCollection;
-        document.querySelectorAll('[data-filter-collection]').forEach((item) => {
-          item.classList.toggle('is-active', item.dataset.filterCollection === catalogState.collection);
-        });
-        renderCatalogs();
-      });
+  document.querySelectorAll('[data-filter-status]').forEach((item) => {
+    item.classList.toggle('is-active', item.dataset.filterStatus === catalogState.status);
+  });
+
+  document.querySelectorAll('[data-filter-category]').forEach((item) => {
+    item.value = catalogState.category;
+  });
+
+  document.querySelectorAll('[data-filter-search]').forEach((item) => {
+    if (item.value !== catalogState.query) item.value = catalogState.query;
+  });
+};
+
+const filterRenderedCatalogCards = () => {
+  document.querySelectorAll('[data-products-container][data-catalog-controls="true"]').forEach((container) => {
+    let visibleCount = 0;
+    const search = catalogState.query.trim().toLowerCase();
+
+    container.querySelectorAll('.catalogo-item').forEach((card) => {
+      const matchesStatus =
+        catalogState.status === 'all'
+        || card.dataset.productStatus === catalogState.status;
+      const matchesCategory =
+        catalogState.category === 'all'
+        || card.dataset.productCategory === catalogState.category;
+      const matchesSearch =
+        !search
+        || (card.dataset.productSearch || '').includes(search);
+      const isVisible = matchesStatus && matchesCategory && matchesSearch;
+
+      card.hidden = !isVisible;
+      if (isVisible) visibleCount += 1;
     });
 
-    controls.querySelectorAll('[data-filter-status]').forEach((button) => {
-      button.addEventListener('click', () => {
-        catalogState.status = button.dataset.filterStatus;
-        document.querySelectorAll('[data-filter-status]').forEach((item) => {
-          item.classList.toggle('is-active', item.dataset.filterStatus === catalogState.status);
-        });
-        renderCatalogs();
-      });
-    });
-
-    const categoryFilter = controls.querySelector('[data-filter-category]');
-    if (categoryFilter) {
-      categoryFilter.addEventListener('change', () => {
-        catalogState.category = categoryFilter.value;
-        document.querySelectorAll('[data-filter-category]').forEach((item) => {
-          item.value = catalogState.category;
-        });
-        renderCatalogs();
-      });
-    }
-
-    const searchInput = controls.querySelector('[data-filter-search]');
-    if (searchInput) {
-      searchInput.addEventListener('input', () => {
-        catalogState.query = searchInput.value;
-        document.querySelectorAll('[data-filter-search]').forEach((item) => {
-          if (item !== searchInput) item.value = catalogState.query;
-        });
-        renderCatalogs();
-      });
+    const emptyState = container.closest('section')?.querySelector('[data-catalog-empty]');
+    if (emptyState) {
+      emptyState.hidden = visibleCount > 0;
     }
   });
+};
+
+function noirApplyStatus(status) {
+  if (!['all', 'available', 'sold'].includes(status)) return false;
+
+  catalogState.status = status;
+  syncCatalogControls();
+  filterRenderedCatalogCards();
+  updateCatalogUrl();
+  window.requestAnimationFrame(() => {
+    syncCatalogControls();
+    filterRenderedCatalogCards();
+  });
+  return false;
+}
+
+window.noirApplyStatus = noirApplyStatus;
+
+const setupCatalogFilters = () => {
+  if (!document.querySelector('[data-catalog-filters]')) return;
+
+  const applyCatalogControl = (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target) return;
+
+    const collectionButton = target.closest('[data-filter-collection]');
+    if (collectionButton && collectionButton.closest('[data-catalog-filters]')) {
+      event.preventDefault();
+      catalogState.collection = collectionButton.dataset.filterCollection;
+      syncCatalogControls();
+      renderCatalogs();
+      filterRenderedCatalogCards();
+      updateCatalogUrl();
+      return;
+    }
+
+    const statusButton = target.closest('[data-filter-status]');
+    if (statusButton && statusButton.closest('[data-catalog-filters]')) {
+      event.preventDefault();
+      noirApplyStatus(statusButton.dataset.filterStatus);
+    }
+  };
+
+  document.addEventListener('pointerdown', applyCatalogControl);
+  document.addEventListener('click', applyCatalogControl);
+
+  document.addEventListener('input', (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLInputElement) || !target.matches('[data-filter-search]')) return;
+
+    catalogState.query = target.value;
+    if (catalogState.query.trim()) catalogState.status = 'all';
+    syncCatalogControls();
+    filterRenderedCatalogCards();
+    updateCatalogUrl();
+  });
+
+  document.addEventListener('change', (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLSelectElement) || !target.matches('[data-filter-category]')) return;
+
+    catalogState.category = target.value;
+    syncCatalogControls();
+    filterRenderedCatalogCards();
+    updateCatalogUrl();
+  });
+
+  document.querySelectorAll('[data-filter-status]').forEach((button) => {
+    const handleDirectStatus = (event) => {
+      event.preventDefault();
+      noirApplyStatus(button.dataset.filterStatus);
+    };
+
+    button.addEventListener('pointerup', handleDirectStatus);
+    button.addEventListener('mouseup', handleDirectStatus);
+    button.addEventListener('touchend', handleDirectStatus);
+  });
+
+  syncCatalogControls();
+  filterRenderedCatalogCards();
 };
 
 const setupMobileMenu = () => {
@@ -741,10 +882,13 @@ const setupProductTilt = () => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  readCatalogStateFromUrl();
   setupMobileMenu();
   setupActiveNav();
   setupCatalogFilters();
   renderCatalogs();
+  filterRenderedCatalogCards();
+  updateCatalogUrl();
   renderProductDetail();
   enableImageHover();
   setupStaggeredMotion();

@@ -1957,29 +1957,40 @@ main {
   padding: 4px;
 }
 
-.catalog-filter-group button {
+.catalog-filter-group button,
+.catalog-filter-group a {
   background-color: transparent;
   border-radius: 999px;
   color: #d8d8d8;
   cursor: pointer;
+  display: block;
   font-family: 'Orbitron', sans-serif;
   font-size: 0.68rem;
   font-weight: 800;
   flex: 1 1 auto;
   padding: 11px 12px;
+  text-align: center;
+  text-decoration: none;
   text-transform: uppercase;
   transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
   white-space: nowrap;
 }
 
 .catalog-filter-group button:hover,
-.catalog-filter-group button.is-active {
+.catalog-filter-group button.is-active,
+.catalog-filter-group a:hover,
+.catalog-filter-group a.is-active {
   background-color: #ffffff;
   color: #050505;
 }
 
-.catalog-filter-group button:hover {
+.catalog-filter-group button:hover,
+.catalog-filter-group a:hover {
   transform: translateY(-1px);
+}
+
+.catalogo-item[hidden] {
+  display: none !important;
 }
 
 .catalog-empty {
@@ -2031,7 +2042,8 @@ main {
     grid-template-columns: 1fr;
   }
 
-  .catalog-filter-group button {
+  .catalog-filter-group button,
+  .catalog-filter-group a {
     flex: 1;
   }
 }
@@ -2316,7 +2328,8 @@ main {
     padding: 0;
   }
 
-  .catalog-filter-group button {
+  .catalog-filter-group button,
+  .catalog-filter-group a {
     border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 0;
     font-size: 0.62rem;
